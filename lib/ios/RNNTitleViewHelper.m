@@ -105,11 +105,6 @@
 	subtitleLabel.frame = labelframe;
 	[subtitleLabel sizeToFit];
 	
-	if (_subtitleOptions.color.hasValue) {
-		UIColor *color = _subtitleOptions.color.get;
-		subtitleLabel.textColor = color;
-	}
-	
 	[self.titleView addSubview:subtitleLabel];
 	
 	return subtitleLabel;
@@ -124,28 +119,18 @@
 	UILabel *titleLabel = [[UILabel alloc] initWithFrame:titleFrame];
 	titleLabel.textAlignment = NSTextAlignmentCenter;
 	titleLabel.backgroundColor = [UIColor clearColor];
-	
 	titleLabel.autoresizingMask = self.titleView.autoresizingMask;
 	
-	UIFont *titleFont = [UIFont boldSystemFontOfSize:17.f];
+	NSDictionary* fontAttributes = [RNNFontAttributesCreator createFontAttributesWithFontFamily:[_titleOptions.fontFamily getWithDefaultValue:nil] fontSize:[_titleOptions.fontSize getWithDefaultValue:nil] color:[_titleOptions.color getWithDefaultValue:nil]];
+	[titleLabel setAttributedText:[[NSAttributedString alloc] initWithString:self.title attributes:fontAttributes]];
 	
-	CGFloat fontSizeFloat = [RCTConvert CGFloat:[_titleOptions.fontSize getWithDefaultValue:@(17)]];
-	titleFont = [UIFont boldSystemFontOfSize:fontSizeFloat];
-	
-	[titleLabel setAttributedText:[[NSAttributedString alloc] initWithString:self.title attributes:_titleOptions.fontAttributes]];
-	
-	CGSize labelSize = [titleLabel.text sizeWithAttributes:@{NSFontAttributeName:titleFont}];
+	CGSize labelSize = [titleLabel.text sizeWithAttributes:fontAttributes];
 	CGRect labelframe = titleLabel.frame;
 	labelframe.size = labelSize;
 	titleLabel.frame = labelframe;
 	
 	if (!self.subtitle) {
 		titleLabel.center = self.titleView.center;
-	}
-	
-	if (_titleOptions.color.hasValue) {
-		UIColor *color = _titleOptions.color.get;
-		titleLabel.textColor = color;
 	}
 	
 	[titleLabel sizeToFit];
