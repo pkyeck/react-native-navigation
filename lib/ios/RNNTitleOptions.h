@@ -12,6 +12,4 @@
 @property (nonatomic, strong) RNNComponentOptions* component;
 @property (nonatomic, strong) Text* componentAlignment;
 
-@property (nonatomic, strong) NSDictionary* fontAttributes;
-
 @end
