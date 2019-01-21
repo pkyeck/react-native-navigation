@@ -32,7 +32,7 @@
 		[sideMenuController side:MMDrawerSideRight width:initialOptions.sideMenu.right.width.get];
 	}
 
-		[sideMenuController setOpenDrawerGestureModeMask:[[initialOptions.sideMenu.openGestureMode getWithDefaultValue:@(MMOpenDrawerGestureModeAll)] integerValue]];
+		[sideMenuController setOpenDrawerGestureModeMask:[[initialOptions.sideMenu.openGestureMode getWithDefaultValue:@(MMOpenDrawerGestureModeBezelPanningCenterView)] integerValue]];
 }
 
 - (void)mergeOptions:(RNNNavigationOptions *)newOptions currentOptions:(RNNNavigationOptions *)currentOptions defaultOptions:(RNNNavigationOptions *)defaultOptions {
